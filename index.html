@@ -140,11 +140,38 @@ input::placeholder{color:#555}
 #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#333;color:#fff;padding:12px 24px;border-radius:24px;font-size:14px;font-weight:600;z-index:1000;transition:transform .3s;pointer-events:none}
 #toast.show{transform:translateX(-50%) translateY(0)}
 
+/* ── HOST QUESTION SCREEN ── */
+#host-q-screen{background:var(--darker);padding:0;justify-content:flex-start}
+.hq-header{background:var(--dark);padding:14px 24px;width:100%;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hq-question-bar{background:#0d1b33;width:100%;padding:20px 32px;text-align:center}
+.hq-question-text{font-size:clamp(18px,3vw,28px);font-weight:800;line-height:1.4;max-width:900px;margin:0 auto}
+.hq-answers{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 24px;max-width:860px;margin:0 auto;width:100%}
+.hq-ans{padding:12px 16px;border-radius:12px;font-size:15px;font-weight:700;display:flex;align-items:center;gap:10px;opacity:.9}
+.hq-ans.hq-a{background:#c0392b}.hq-ans.hq-b{background:#2980b9}
+.hq-ans.hq-c{background:#d4ac0d;color:#1a1a2e}.hq-ans.hq-d{background:#27ae60}
+.hq-ans.hq-correct{outline:3px solid #fff;opacity:1;animation:correctPulse .8s ease infinite}
+.hq-bottom{flex:1;padding:12px 24px;width:100%;overflow-y:auto}
+.hq-answered-count{font-size:16px;font-weight:700;color:#aaa;margin-bottom:10px;text-align:center}
+.hq-answered-count span{color:#2ecc71;font-size:20px}
+
+/* Player live grid */
+.hq-player-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;max-width:1100px;margin:0 auto}
+.hq-pcard{background:#16213e;border:2px solid #2a2a4a;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:8px;transition:border-color .3s,background .3s}
+.hq-pcard .hq-pname{flex:1;font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hq-pcard .hq-pstatus{font-size:18px;flex-shrink:0}
+.hq-pcard .hq-pdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.hq-pcard.answered{border-color:#f1c40f;background:#1a1800}
+.hq-pcard.correct{border-color:#2ecc71;background:#0d2010;animation:popIn .4s ease}
+.hq-pcard.wrong{border-color:#e74c3c;background:#200d0d}
+
+.hq-reveal-row{display:flex;justify-content:center;gap:12px;padding:12px 24px;background:var(--dark);width:100%;flex-wrap:wrap}
+
 /* Responsive */
 @media(max-width:500px){
   .logo-text{font-size:32px}.code-display{font-size:48px;letter-spacing:8px}
   .answer-grid{grid-template-columns:1fr}.q-text{font-size:18px}
   .mode-grid,.pack-grid{grid-template-columns:1fr}
+  .hq-answers{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -263,7 +290,42 @@ input::placeholder{color:#555}
   </div>
 </div>
 
-<!-- QUESTION -->
+<!-- HOST QUESTION SCREEN (teacher view) -->
+<div id="host-q-screen" class="screen">
+  <!-- header: progress + timer + mode -->
+  <div class="hq-header">
+    <div class="q-progress" id="hq-progress">Q1/15</div>
+    <div class="q-timer-wrap" style="flex:1;max-width:300px">
+      <div class="q-timer-bar"><div class="q-timer-fill" id="hq-timer-fill" style="width:100%"></div></div>
+    </div>
+    <div class="q-timer-num" id="hq-timer-num">20</div>
+    <div class="q-mode-badge" id="hq-mode-badge">Classic</div>
+  </div>
+  <!-- question text -->
+  <div class="hq-question-bar">
+    <div class="hq-question-text" id="hq-q-text">Loading...</div>
+  </div>
+  <!-- 4 answer labels (not clickable — just for display on projector) -->
+  <div class="hq-answers">
+    <div class="hq-ans hq-a" id="hq-ans-a"><span style="font-size:20px">▲</span><span id="hq-a-text"></span></div>
+    <div class="hq-ans hq-b" id="hq-ans-b"><span style="font-size:20px">◆</span><span id="hq-b-text"></span></div>
+    <div class="hq-ans hq-c" id="hq-ans-c"><span style="font-size:20px">●</span><span id="hq-c-text"></span></div>
+    <div class="hq-ans hq-d" id="hq-ans-d"><span style="font-size:20px">■</span><span id="hq-d-text"></span></div>
+  </div>
+  <!-- live player grid -->
+  <div class="hq-bottom">
+    <div class="hq-answered-count" id="hq-count">Waiting... <span>0</span> answered</div>
+    <div class="hq-player-grid" id="hq-player-grid"></div>
+  </div>
+  <!-- reveal / next buttons -->
+  <div class="hq-reveal-row">
+    <button class="btn btn-secondary btn-sm" onclick="cancelGame()">✕ End</button>
+    <button class="btn btn-yellow" id="hq-reveal-btn" onclick="hostRevealNow()">🔍 Reveal Answers</button>
+    <button class="btn btn-green" id="hq-next-btn" style="display:none" onclick="hostAdvance()">Next Question ▶</button>
+  </div>
+</div>
+
+<!-- QUESTION (player screen) -->
 <div id="question-screen" class="screen" style="justify-content:flex-start;padding:0">
   <div class="q-header">
     <div class="q-progress" id="q-progress-text">Q1/15</div>
@@ -565,6 +627,7 @@ function addListener(r, event, cb){
 }
 
 function cleanupGame(){
+  _detachHQListener();
   state.listeners.forEach(({r,event,cb})=>r.off(event,cb));
   state.listeners=[];
   if(state.timerInterval) clearInterval(state.timerInterval);
@@ -684,27 +747,145 @@ async function hostNextQuestion(){
   showHostQuestion(qi,q);
 }
 
+// ── dedicated per-question Firebase listener (managed outside state.listeners) ──
+let _hqPlayerRef = null;
+let _hqPlayerCb  = null;
+function _detachHQListener(){
+  if(_hqPlayerRef && _hqPlayerCb){ _hqPlayerRef.off('value',_hqPlayerCb); }
+  _hqPlayerRef=null; _hqPlayerCb=null;
+}
+
 function showHostQuestion(qi,q){
   state.currentQ=qi;
   state.answered=false;
-  showScreen('question-screen');
-  document.getElementById('q-progress-text').textContent='Q'+(qi+1)+'/'+state.qCount;
-  document.getElementById('q-text').textContent=q.q;
-  document.getElementById('ans-a-text').textContent=q.a;
-  document.getElementById('ans-b-text').textContent=q.b;
-  document.getElementById('ans-c-text').textContent=q.c;
-  document.getElementById('ans-d-text').textContent=q.d;
-  document.getElementById('q-mode-badge').textContent=state.mode==='goldrush'?'Gold Rush':state.mode==='survival'?'Survival':state.mode==='streak'?'Streak':' Classic';
-  document.getElementById('answered-msg').style.display='none';
-  document.getElementById('answer-grid').style.display='grid';
-  ['a','b','c','d'].forEach(l=>{
-    const btn=document.getElementById('ans-'+l);
-    btn.disabled=false;
-    btn.className='ans-btn ans-'+l;
-  });
+  state.hqRevealed=false;
+  _detachHQListener();
 
-  setupStatBar();
-  startTimer(state.qTime, ()=>revealAnswer(q.correct));
+  // Populate teacher screen
+  document.getElementById('hq-progress').textContent='Q'+(qi+1)+'/'+state.qCount;
+  document.getElementById('hq-q-text').textContent=q.q;
+  document.getElementById('hq-a-text').textContent=q.a;
+  document.getElementById('hq-b-text').textContent=q.b;
+  document.getElementById('hq-c-text').textContent=q.c;
+  document.getElementById('hq-d-text').textContent=q.d;
+  const modeLabel={classic:'Classic',goldrush:'Gold Rush',survival:'Survival',streak:'Streak'};
+  document.getElementById('hq-mode-badge').textContent=modeLabel[state.mode]||'Classic';
+  ['a','b','c','d'].forEach(l=>document.getElementById('hq-ans-'+l).classList.remove('hq-correct'));
+  document.getElementById('hq-reveal-btn').style.display='';
+  document.getElementById('hq-next-btn').style.display='none';
+  document.getElementById('hq-player-grid').innerHTML='';
+  document.getElementById('hq-count').innerHTML='Waiting... <span>0</span> answered';
+  showScreen('host-q-screen');
+
+  // Live player grid listener
+  _hqPlayerRef=ref(state.code+'/players');
+  _hqPlayerCb=snap=>{
+    if(!document.getElementById('host-q-screen').classList.contains('active')) return;
+    const players=snap.val()||{};
+    _renderHQGrid(players, state.hqRevealed, state.hqCorrect);
+  };
+  _hqPlayerRef.on('value',_hqPlayerCb);
+
+  // Start host timer — auto-reveal when time runs out
+  startHQTimer(state.qTime, ()=>{
+    if(!state.hqRevealed) hostRevealNow();
+  });
+}
+
+function startHQTimer(seconds, onEnd){
+  if(state.timerInterval) clearInterval(state.timerInterval);
+  state.timeLeft=seconds;
+  const fill=document.getElementById('hq-timer-fill');
+  const num=document.getElementById('hq-timer-num');
+  const total=seconds;
+  function update(){
+    const pct=(state.timeLeft/total)*100;
+    fill.style.width=pct+'%';
+    const col=pct>60?'#2ecc71':pct>30?'#f1c40f':'#e74c3c';
+    fill.style.background=col; num.style.color=col;
+    num.textContent=Math.ceil(state.timeLeft);
+  }
+  update();
+  state.timerInterval=setInterval(()=>{
+    state.timeLeft-=0.1;
+    if(state.timeLeft<=0){
+      clearInterval(state.timerInterval); state.timerInterval=null;
+      state.timeLeft=0; update(); onEnd();
+    } else { update(); }
+  },100);
+}
+
+function _renderHQGrid(players, revealed, correct){
+  const grid=document.getElementById('hq-player-grid');
+  const names=Object.keys(players);
+  let answeredCount=0;
+  names.forEach(name=>{
+    const p=players[name];
+    if(p.answered) answeredCount++;
+    let card=document.getElementById('hq-pc-'+CSS.escape(name));
+    if(!card){
+      card=document.createElement('div');
+      card.className='hq-pcard';
+      card.id='hq-pc-'+CSS.escape(name);
+      const dot=document.createElement('div');
+      dot.className='hq-pdot';
+      dot.style.background=p.color||colorForName(name);
+      const pname=document.createElement('div');
+      pname.className='hq-pname';
+      pname.textContent=(p.isHost?'👑 ':'')+name;
+      const status=document.createElement('div');
+      status.className='hq-pstatus';
+      card.appendChild(dot); card.appendChild(pname); card.appendChild(status);
+      grid.appendChild(card);
+    }
+    const status=card.querySelector('.hq-pstatus');
+    if(revealed){
+      const isCorrect=p.answer===correct;
+      card.className='hq-pcard '+(isCorrect?'correct':'wrong');
+      status.textContent=isCorrect?'✅':'❌';
+    } else if(p.answered){
+      card.className='hq-pcard answered';
+      status.textContent='✓';
+    } else {
+      card.className='hq-pcard';
+      status.textContent='⏳';
+    }
+  });
+  const countEl=document.getElementById('hq-count');
+  if(revealed){
+    countEl.innerHTML='Results revealed!';
+  } else {
+    countEl.innerHTML=`<span>${answeredCount}</span> / ${names.length} answered`;
+  }
+}
+
+async function hostRevealNow(){
+  if(state.hqRevealed) return;
+  state.hqRevealed=true;
+  if(state.timerInterval){clearInterval(state.timerInterval);state.timerInterval=null;}
+  document.getElementById('hq-reveal-btn').style.display='none';
+
+  const q=state.questions[state.currentQ];
+  const correct=q.correct;
+  state.hqCorrect=correct;
+
+  // Highlight correct answer label
+  document.getElementById('hq-ans-'+correct).classList.add('hq-correct');
+
+  // Write correct to Firebase + score everyone
+  await revealAnswer(correct);
+
+  // Switch buttons
+  document.getElementById('hq-next-btn').style.display='';
+  document.getElementById('hq-next-btn').textContent=
+    state.currentQ>=state.qCount-1?'Show Final 🏆':'Next Question ▶';
+}
+
+function hostAdvance(){
+  _detachHQListener();
+  state.currentQ++;
+  if(state.currentQ>=state.qCount){ endGame(); }
+  else { hostNextQuestion(); }
 }
 
 function setupStatBar(){
@@ -838,10 +1019,13 @@ async function revealAnswer(correct){
   await ref(state.code+'/players').update(updates);
   await ref(state.code).update({status:'results'});
 
-  // Update local state for host/player display
+  // Update local score state
   state.score=(players[state.playerName]?.score||0)+(updates[state.playerName+'/lastGain']||0);
 
-  showResultsScreen(correct, players, updates);
+  // Host manages its own screen (host-q-screen → hostAdvance); players get showResultsScreen
+  if(state.role!=='host'){
+    showResultsScreen(correct, players, updates);
+  }
 }
 
 // ============================
