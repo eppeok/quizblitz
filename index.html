@@ -781,6 +781,8 @@ function selectMode(el,mode){
 // FIREBASE HELPERS
 // ============================
 function ref(path){ return db.ref('quizblitz/'+path); }
+function acctRef(path){ return db.ref('accounts/'+path); }
+function getSession(){ try{return JSON.parse(localStorage.getItem('ek_session')||'null')}catch{return null} }
 
 function addListener(r, event, cb){
   r.on(event, cb);
@@ -838,6 +840,10 @@ async function hostGame(){
   state.teamCount=selectedTeams;
   state.report=[];
 
+  // Check if a teacher is signed in — tag the game with their account
+  const session=getSession();
+  const hostAccountId=(session&&session.role==='teacher')?session.id:null;
+
   const gameData={
     host:name,
     mode,pack,
@@ -849,6 +855,7 @@ async function hostGame(){
     createdAt:firebase.database.ServerValue.TIMESTAMP,
     players:{}
   };
+  if(hostAccountId) gameData.hostAccountId=hostAccountId;
   // Store questions server-side (answers hidden — just the question text and options)
   const safeQ=shuffled.map(q=>({text:q.q,a:q.a,b:q.b,c:q.c,d:q.d}));
   gameData.questions=safeQ;
@@ -858,6 +865,11 @@ async function hostGame(){
     // Host joins as a player too
     state.myColor=colorForName(name);
     await ref(code+'/players/'+name).set({score:0,coins:0,lives:3,streak:0,color:state.myColor,answered:false,answer:'',lastGain:0,isHost:true});
+    // Tag game to teacher account if signed in
+    if(hostAccountId){
+      state.hostAccountId=hostAccountId;
+      acctRef('teachers/'+hostAccountId+'/games/'+code).set(firebase.database.ServerValue.TIMESTAMP).catch(()=>{});
+    }
     setupHostLobby(code,shuffled.length,mode);
   }catch(e){
     toast('❌ Could not create game. Check internet.');
@@ -1432,6 +1444,27 @@ function showFinalScreen(game){
   // Show report button for host if we have report data
   const reportBtn=document.getElementById('report-btn');
   reportBtn.style.display=(state.role==='host'&&state.report&&state.report.length)?'':'none';
+
+  // Save result to student account if signed in
+  if(state.role==='player'){
+    const sess=getSession();
+    if(sess&&sess.role==='student'){
+      const myEntry=sorted.find(p=>p.name===state.playerName);
+      const myScore=myEntry?myEntry.score:0;
+      const resultData={
+        score:myScore,
+        mode:state.mode,
+        pack:state.pack||'gk',
+        players:sorted.length,
+        timestamp:Date.now(),
+        code:state.code
+      };
+      const acctId=sess.id;
+      acctRef('students/'+acctId+'/recentGames').push(resultData).catch(()=>{});
+      acctRef('students/'+acctId+'/gamesPlayed').transaction(n=>(n||0)+1).catch(()=>{});
+      acctRef('students/'+acctId+'/quizblitzXP').transaction(n=>(n||0)+Math.max(10,Math.round(myScore/10))).catch(()=>{});
+    }
+  }
 
   showScreen('final-screen');
   cleanupGame();
