@@ -166,6 +166,67 @@ input::placeholder{color:#555}
 
 .hq-reveal-row{display:flex;justify-content:center;gap:12px;padding:12px 24px;background:var(--dark);width:100%;flex-wrap:wrap}
 
+/* ── TEAM MODE ── */
+.team-selector{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.team-opt{flex:1;min-width:80px;padding:10px 6px;border:2px solid #2a2a4a;border-radius:10px;background:#0f0f1a;color:#aaa;font-weight:700;font-size:13px;cursor:pointer;text-align:center;transition:all .2s}
+.team-opt:hover,.team-opt.selected{border-color:var(--accent);color:#fff;background:#1a0a1e}
+.team-bar{display:flex;gap:10px;padding:10px 24px;width:100%;background:#0a0a1a;flex-wrap:wrap;justify-content:center}
+.team-score-box{flex:1;min-width:90px;max-width:160px;border-radius:10px;padding:8px 12px;text-align:center;font-weight:800}
+.team-score-box .t-name{font-size:11px;opacity:.85;text-transform:uppercase;letter-spacing:.5px}
+.team-score-box .t-score{font-size:22px;margin-top:2px}
+
+/* ── PACK MANAGER ── */
+#pack-manager-screen{background:linear-gradient(135deg,#1a1a2e,#16213e);align-items:flex-start;padding:24px}
+.pm-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;width:100%;max-width:640px}
+.pm-list{width:100%;max-width:640px}
+.pm-card{background:var(--card);border-radius:14px;padding:16px 20px;margin-bottom:12px;display:flex;align-items:center;gap:12px;border:1px solid #2a2a4a}
+.pm-card .pm-info{flex:1}
+.pm-card .pm-name{font-weight:700;font-size:15px;margin-bottom:2px}
+.pm-card .pm-meta{font-size:12px;color:#666}
+.pm-actions{display:flex;gap:6px}
+
+/* ── PACK EDITOR ── */
+#pack-editor-screen{background:var(--darker);align-items:flex-start;padding:20px;overflow-y:auto}
+.pe-wrap{width:100%;max-width:680px;margin:0 auto}
+.pe-q-card{background:var(--card);border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid #2a2a4a;position:relative}
+.pe-q-num{font-size:11px;color:#666;font-weight:700;text-transform:uppercase;margin-bottom:8px}
+.pe-q-input{margin-bottom:8px}
+.pe-opts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.pe-opt-row{display:flex;align-items:center;gap:6px}
+.pe-opt-row label{font-size:12px;font-weight:700;width:20px;flex-shrink:0}
+.pe-opt-row input[type=text]{margin-bottom:0;padding:7px 10px;font-size:13px}
+.pe-correct-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pe-correct-row label{font-size:12px;color:#aaa;display:flex;align-items:center;gap:4px;cursor:pointer}
+.pe-correct-row input[type=radio]{width:auto;margin:0}
+.pe-del-btn{position:absolute;top:10px;right:10px;background:#2a2a4a;border:none;color:#aaa;border-radius:6px;padding:4px 8px;cursor:pointer;font-size:13px}
+.pe-del-btn:hover{background:#e74c3c;color:#fff}
+
+/* ── REPORT SCREEN ── */
+#report-screen{background:var(--darker);align-items:flex-start;padding:20px;overflow-y:auto}
+.report-wrap{width:100%;max-width:760px;margin:0 auto}
+.report-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;margin-bottom:8px;background:var(--card)}
+.report-row .rq-num{font-size:12px;color:#666;min-width:28px;font-weight:700}
+.report-row .rq-text{flex:1;font-size:13px;line-height:1.4}
+.report-row .rq-pct{font-size:16px;font-weight:900;min-width:48px;text-align:right}
+.report-row .rq-bar-wrap{width:90px;height:8px;background:#2a2a4a;border-radius:4px;overflow:hidden;flex-shrink:0}
+.report-row .rq-bar-fill{height:100%;border-radius:4px;transition:width .5s ease}
+.report-legend{display:flex;gap:16px;font-size:12px;color:#666;margin-bottom:16px;flex-wrap:wrap}
+.report-legend span{display:flex;align-items:center;gap:4px}
+.dot-g{width:8px;height:8px;border-radius:50%;background:#2ecc71;display:inline-block}
+.dot-y{width:8px;height:8px;border-radius:50%;background:#f1c40f;display:inline-block}
+.dot-r{width:8px;height:8px;border-radius:50%;background:#e74c3c;display:inline-block}
+
+/* ── HOMEWORK ── */
+#homework-host-screen{background:var(--darker);align-items:flex-start;padding:20px;overflow-y:auto}
+.hw-wrap{width:100%;max-width:700px;margin:0 auto}
+.hw-row{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--card);border-radius:10px;margin-bottom:8px}
+.hw-row .hw-name{flex:1;font-weight:700;font-size:14px}
+.hw-row .hw-status{font-size:20px;min-width:28px;text-align:center}
+.hw-row .hw-score{font-weight:700;color:var(--yellow);min-width:60px;text-align:right}
+.hw-row .hw-pct{font-size:12px;color:#666;min-width:40px;text-align:right}
+#homework-play-screen{background:linear-gradient(135deg,#1a1a2e,#16213e)}
+.hw-play-card{background:var(--card);border-radius:20px;padding:28px;max-width:520px;width:100%;text-align:center}
+
 /* Responsive */
 @media(max-width:500px){
   .logo-text{font-size:32px}.code-display{font-size:48px;letter-spacing:8px}
@@ -220,8 +281,25 @@ input::placeholder{color:#555}
         <div class="mode-desc">Combos = big points</div>
       </div>
     </div>
+    <label>Play style</label>
+    <div class="team-selector">
+      <div class="team-opt selected" onclick="selectTeams(0,this)">👤 Solo</div>
+      <div class="team-opt" onclick="selectTeams(2,this)">⚔️ 2 Teams</div>
+      <div class="team-opt" onclick="selectTeams(3,this)">🔺 3 Teams</div>
+      <div class="team-opt" onclick="selectTeams(4,this)">🟦 4 Teams</div>
+    </div>
+    <label>Homework mode <span style="font-size:11px;color:#666">(students play at their own pace at home)</span></label>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <input type="checkbox" id="hw-mode-chk" style="width:auto;margin:0" onchange="toggleHomeworkMode(this.checked)"/>
+      <label for="hw-mode-chk" style="font-size:14px;color:#ccc;cursor:pointer;margin:0">Enable homework mode</label>
+    </div>
     <label>Question pack</label>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <span style="font-size:12px;color:#666">Built-in packs</span>
+      <button class="btn btn-secondary btn-sm" onclick="showScreen('pack-manager-screen');renderPackManager()">📝 My Custom Packs</button>
+    </div>
     <div class="pack-grid" id="pack-grid"></div>
+    <div id="custom-pack-list" style="margin-bottom:16px"></div>
     <label>Number of questions</label>
     <select id="q-count">
       <option value="10">10 questions</option>
@@ -312,6 +390,8 @@ input::placeholder{color:#555}
     <div class="hq-ans hq-c" id="hq-ans-c"><span style="font-size:20px">●</span><span id="hq-c-text"></span></div>
     <div class="hq-ans hq-d" id="hq-ans-d"><span style="font-size:20px">■</span><span id="hq-d-text"></span></div>
   </div>
+  <!-- team scores bar (hidden in solo mode) -->
+  <div class="team-bar" id="hq-team-bar" style="display:none"></div>
   <!-- live player grid -->
   <div class="hq-bottom">
     <div class="hq-answered-count" id="hq-count">Waiting... <span>0</span> answered</div>
@@ -374,9 +454,90 @@ input::placeholder{color:#555}
     <div class="winner-name" id="final-winner">---</div>
     <div class="winner-score" id="final-winner-score">0 points</div>
     <div class="final-podium" id="final-podium"></div>
+    <div id="final-team-result" style="margin-bottom:12px"></div>
     <div style="margin-top:24px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
       <button class="btn btn-secondary" onclick="showScreen('home-screen');cleanupGame()">🏠 Home</button>
+      <button class="btn btn-yellow" id="report-btn" style="display:none" onclick="showReportScreen()">📊 Class Report</button>
       <button class="btn btn-primary" onclick="playAgain()">🔄 Play Again</button>
+    </div>
+  </div>
+</div>
+
+<!-- PACK MANAGER -->
+<div id="pack-manager-screen" class="screen" style="justify-content:flex-start">
+  <div class="pm-wrap" style="width:100%;max-width:640px;margin:0 auto;padding:20px">
+    <div class="pm-header">
+      <button class="btn btn-secondary btn-sm" onclick="showScreen('host-setup-screen')">← Back</button>
+      <h2 style="flex:1">📝 My Custom Packs</h2>
+      <button class="btn btn-primary btn-sm" onclick="openPackEditor(null)">+ Create Pack</button>
+    </div>
+    <div style="margin-bottom:12px;display:flex;gap:8px">
+      <input id="import-code-inp" type="text" placeholder="Enter share code to import a pack..." style="flex:1;margin:0;padding:10px 14px;font-size:14px"/>
+      <button class="btn btn-secondary btn-sm" onclick="importPackByCode()">Import</button>
+    </div>
+    <div id="pm-list"></div>
+    <div id="pm-empty" style="color:#555;text-align:center;padding:40px;font-size:14px">No custom packs yet. Create one!</div>
+  </div>
+</div>
+
+<!-- PACK EDITOR -->
+<div id="pack-editor-screen" class="screen" style="justify-content:flex-start">
+  <div class="pe-wrap">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+      <button class="btn btn-secondary btn-sm" onclick="showScreen('pack-manager-screen');renderPackManager()">← Back</button>
+      <h2 style="flex:1" id="pe-title">Create Pack</h2>
+      <button class="btn btn-green btn-sm" onclick="savePack()">💾 Save Pack</button>
+    </div>
+    <label>Pack name</label>
+    <input id="pe-pack-name" type="text" placeholder="e.g. Year 9 Science — Forces" maxlength="40" style="margin-bottom:20px"/>
+    <div id="pe-questions-list"></div>
+    <button class="btn btn-secondary" style="width:100%;margin-top:8px" onclick="addQuestionRow()">+ Add Question</button>
+    <div style="height:40px"></div>
+  </div>
+</div>
+
+<!-- CLASS REPORT -->
+<div id="report-screen" class="screen" style="justify-content:flex-start">
+  <div class="report-wrap">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+      <button class="btn btn-secondary btn-sm" onclick="showScreen('final-screen')">← Back</button>
+      <h2 style="flex:1">📊 Class Report</h2>
+      <button class="btn btn-secondary btn-sm" onclick="copyReportCSV()">📋 Copy CSV</button>
+    </div>
+    <div id="report-summary" style="background:var(--card);border-radius:12px;padding:16px;margin-bottom:16px;font-size:14px;line-height:1.8"></div>
+    <div class="report-legend">
+      <span><i class="dot-g"></i> &gt;80% correct — good</span>
+      <span><i class="dot-y"></i> 50–80% — review</span>
+      <span><i class="dot-r"></i> &lt;50% — reteach</span>
+    </div>
+    <div id="report-list"></div>
+  </div>
+</div>
+
+<!-- HOMEWORK HOST VIEW -->
+<div id="homework-host-screen" class="screen" style="justify-content:flex-start">
+  <div class="hw-wrap">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+      <button class="btn btn-secondary btn-sm" onclick="cancelGame();showScreen('home-screen')">✕ Close</button>
+      <h2 style="flex:1">📋 Homework Results</h2>
+      <button class="btn btn-yellow btn-sm" id="hw-report-btn" style="display:none" onclick="showReportScreen()">📊 Report</button>
+    </div>
+    <div style="background:var(--card);border-radius:12px;padding:14px;margin-bottom:16px;font-size:13px;color:#aaa">
+      Share code: <span id="hw-code-disp" style="color:var(--yellow);font-weight:900;font-size:18px;letter-spacing:4px"></span>
+      &nbsp;·&nbsp; Students go to <b style="color:#fff">eppeok.github.io/quizblitz</b> and join with this code
+    </div>
+    <div id="hw-live-table" style="color:#555;text-align:center;padding:20px">Waiting for students...</div>
+  </div>
+</div>
+
+<!-- HOMEWORK PLAYER SCREEN -->
+<div id="homework-play-screen" class="screen">
+  <div class="hw-play-card">
+    <div id="hw-play-inner">
+      <div style="font-size:48px;margin-bottom:12px">📚</div>
+      <h2 id="hw-play-title" style="margin-bottom:8px">Homework Quiz</h2>
+      <p id="hw-play-sub" style="color:#aaa;font-size:14px;margin-bottom:24px"></p>
+      <button class="btn btn-primary btn-big" onclick="startHomeworkPlay()">Start ▶</button>
     </div>
   </div>
 </div>
@@ -648,9 +809,22 @@ async function hostGame(){
   const mode=selectedMode;
   const pack=selectedPack;
 
+  // Resolve questions from built-in or custom pack
+  let packQ;
+  if(pack.startsWith('__custom__')){
+    const idx=parseInt(pack.replace('__custom__',''));
+    const packs=loadCustomPacks();
+    packQ=packs[idx]?.questions||[];
+    if(!packQ.length){ toast('That pack has no questions!'); return; }
+  } else {
+    packQ=PACKS[pack]?.questions||PACKS.gk.questions;
+  }
+
   const code=generateCode();
-  const packQ=PACKS[pack].questions;
   const shuffled=[...packQ].sort(()=>Math.random()-.5).slice(0,Math.min(qCount,packQ.length));
+
+  // Homework mode
+  if(isHomeworkMode){ await startHomeworkGame(name, shuffled, qTime); return; }
 
   state.role='host';
   state.code=code;
@@ -661,12 +835,15 @@ async function hostGame(){
   state.qTime=qTime;
   state.questions=shuffled;
   state.currentQ=0;
+  state.teamCount=selectedTeams;
+  state.report=[];
 
   const gameData={
     host:name,
     mode,pack,
     qCount:shuffled.length,
     qTime,
+    teamCount:selectedTeams,
     status:'lobby',
     currentQ:0,
     createdAt:firebase.database.ServerValue.TIMESTAMP,
@@ -719,7 +896,16 @@ function setupHostLobby(code,totalQ,mode){
 async function startGame(){
   if(!state.code) return;
   document.getElementById('start-btn').disabled=true;
-  await ref(state.code).update({status:'starting',currentQ:0});
+  // Assign teams if team mode
+  if(state.teamCount>0){
+    const snap=await ref(state.code+'/players').once('value');
+    const names=Object.keys(snap.val()||{});
+    const assignments=assignTeams(names,state.teamCount);
+    const teamUpdates={};
+    names.forEach(n=>{ teamUpdates[n+'/team']=assignments[n]; });
+    await ref(state.code+'/players').update(teamUpdates);
+  }
+  await ref(state.code).update({status:'starting',currentQ:0,teamCount:state.teamCount});
   hostNextQuestion();
 }
 
@@ -783,6 +969,7 @@ function showHostQuestion(qi,q){
     if(!document.getElementById('host-q-screen').classList.contains('active')) return;
     const players=snap.val()||{};
     _renderHQGrid(players, state.hqRevealed, state.hqCorrect);
+    if(state.hqRevealed) renderTeamBar(players, state.teamCount);
   };
   _hqPlayerRef.on('value',_hqPlayerCb);
 
@@ -1017,6 +1204,27 @@ async function revealAnswer(correct){
   });
 
   await ref(state.code+'/players').update(updates);
+
+  // Track per-question report data
+  if(state.role==='host'){
+    const total=Object.keys(players).length;
+    const correctCount=Object.values(players).filter(p=>p.answer===correct).length;
+    if(!state.report) state.report=[];
+    state.report.push({qi,text:q.q,correct:correctCount,total,correctAnswer:q[correct]||''});
+  }
+
+  // Update team totals if team mode
+  if(state.teamCount>0){
+    const teamTotals={};
+    TEAM_NAMES.slice(0,state.teamCount).forEach(t=>{ teamTotals[t]=0; });
+    Object.entries(players).forEach(([name,p])=>{
+      const t=p.team; if(t&&teamTotals[t]!==undefined) teamTotals[t]+=(p.score||0)+(updates[name+'/lastGain']||0);
+    });
+    const teamFbUpdates={};
+    Object.entries(teamTotals).forEach(([t,s])=>{ teamFbUpdates['teamScores/'+t]=s; });
+    await ref(state.code).update(teamFbUpdates);
+  }
+
   await ref(state.code).update({status:'results'});
 
   // Update local score state
@@ -1185,10 +1393,29 @@ async function endGame(){
 // ============================
 function showFinalScreen(game){
   const players=game.players||{};
-  const sorted=Object.entries(players).map(([name,p])=>({name,score:p.score||0,color:p.color||colorForName(name)})).sort((a,b)=>b.score-a.score);
+  const teamCount=game.teamCount||state.teamCount||0;
+  const sorted=Object.entries(players).map(([name,p])=>({name,score:p.score||0,color:p.color||colorForName(name),team:p.team||null})).sort((a,b)=>b.score-a.score);
   const winner=sorted[0]||{name:'Nobody',score:0};
-  document.getElementById('final-winner').textContent=winner.name;
-  document.getElementById('final-winner-score').textContent=winner.score.toLocaleString()+' points';
+
+  // Team mode: find winning team
+  const teamResult=document.getElementById('final-team-result');
+  if(teamCount>0 && game.teamScores){
+    const teamsSorted=Object.entries(game.teamScores).sort((a,b)=>b[1]-a[1]);
+    const winTeam=teamsSorted[0];
+    teamResult.innerHTML=`<div style="font-size:13px;color:#aaa;margin-bottom:6px">Winning Team</div>`+
+      teamsSorted.map(([t,s],i)=>`<div style="display:inline-block;padding:6px 16px;border-radius:20px;margin:3px;font-weight:800;background:${TEAM_COLORS[t]}22;border:2px solid ${TEAM_COLORS[t]};color:${TEAM_COLORS[t]}">${i===0?'🏆 ':''} ${t}: ${s}</div>`).join('');
+    teamResult.style.display='block';
+    // Winner is top scorer from winning team
+    const teamWinner=sorted.find(p=>p.team===winTeam[0])||winner;
+    document.getElementById('final-winner').textContent='🏅 Team '+winTeam[0];
+    document.getElementById('final-winner-score').textContent=winTeam[1]+' team points';
+    if(winTeam[0]===sorted.find(p=>p.name===state.playerName)?.team) launchConfetti();
+  } else {
+    teamResult.style.display='none';
+    document.getElementById('final-winner').textContent=winner.name;
+    document.getElementById('final-winner-score').textContent=winner.score.toLocaleString()+' points';
+    if(winner.name===state.playerName) launchConfetti();
+  }
 
   const podium=document.getElementById('final-podium');
   podium.innerHTML='';
@@ -1196,12 +1423,17 @@ function showFinalScreen(game){
     const medals=['🥇','🥈','🥉','4th','5th'];
     const d=document.createElement('div');
     d.className='podium-item';
-    d.innerHTML=`<div style="font-size:20px;color:${p.color};font-weight:700">${medals[i]||'#'+(i+1)}</div><div>${escHtml(p.name)}</div><div>${p.score}</div>`;
+    d.innerHTML=`<div style="font-size:20px;color:${p.color};font-weight:700">${medals[i]||'#'+(i+1)}</div>
+    <div>${escHtml(p.name)}${p.team?` <span style="font-size:10px;color:${TEAM_COLORS[p.team]||'#aaa'}">(${p.team})</span>`:''}</div>
+    <div>${p.score}</div>`;
     podium.appendChild(d);
   });
 
+  // Show report button for host if we have report data
+  const reportBtn=document.getElementById('report-btn');
+  reportBtn.style.display=(state.role==='host'&&state.report&&state.report.length)?'':'none';
+
   showScreen('final-screen');
-  if(winner.name===state.playerName) launchConfetti();
   cleanupGame();
 }
 
@@ -1218,6 +1450,7 @@ async function joinGame(){
     const snap=await ref(code).once('value');
     const game=snap.val();
     if(!game){toast('❌ Game not found. Check the code!');return;}
+    if(game.status==='homework'){ await joinHomework(code,name); return; }
     if(game.status!=='lobby'&&game.status!=='starting'){toast('❌ Game already started!');return;}
     if(game.players&&game.players[name]){toast('❌ That name is already taken!');return;}
 
@@ -1252,8 +1485,9 @@ async function joinGame(){
       Object.entries(pl).forEach(([n,p])=>{
         const chip=document.createElement('div');
         chip.className='player-chip';
-        chip.style.background=p.color||colorForName(n);
-        chip.textContent=(p.isHost?'👑 ':'')+n;
+        const teamCol=p.team?TEAM_COLORS[p.team]:null;
+        chip.style.background=teamCol||(p.color||colorForName(n));
+        chip.textContent=(p.isHost?'👑 ':'')+n+(p.team?' ('+p.team+')':'');
         grid.appendChild(chip);
       });
     });
@@ -1320,9 +1554,381 @@ function escHtml(s){
 }
 
 // ============================
+// TEAM MODE
+// ============================
+const TEAM_NAMES = ['Red','Blue','Green','Yellow'];
+const TEAM_COLORS = {Red:'#e74c3c',Blue:'#3498db',Green:'#2ecc71',Yellow:'#f1c40f'};
+let selectedTeams = 0; // 0=solo
+
+function selectTeams(n, el){
+  selectedTeams = n;
+  document.querySelectorAll('.team-opt').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function assignTeams(playerNames, teamCount){
+  const shuffled=[...playerNames].sort(()=>Math.random()-.5);
+  const assignment={};
+  shuffled.forEach((name,i)=>{ assignment[name]=TEAM_NAMES[i%teamCount]; });
+  return assignment;
+}
+
+function renderTeamBar(players, teamCount){
+  const bar=document.getElementById('hq-team-bar');
+  if(!teamCount){ bar.style.display='none'; return; }
+  bar.style.display='flex';
+  // Tally team scores
+  const totals={};
+  TEAM_NAMES.slice(0,teamCount).forEach(t=>{ totals[t]=0; });
+  Object.values(players).forEach(p=>{ if(p.team&&totals[p.team]!==undefined) totals[p.team]+=(p.score||0); });
+  bar.innerHTML=TEAM_NAMES.slice(0,teamCount).map(t=>`
+    <div class="team-score-box" style="background:${TEAM_COLORS[t]}22;border:2px solid ${TEAM_COLORS[t]}">
+      <div class="t-name" style="color:${TEAM_COLORS[t]}">${t}</div>
+      <div class="t-score">${totals[t]}</div>
+    </div>`).join('');
+}
+
+// ============================
+// HOMEWORK MODE
+// ============================
+let isHomeworkMode = false;
+
+function toggleHomeworkMode(checked){
+  isHomeworkMode = checked;
+}
+
+async function startHomeworkGame(name, questions, qTime){
+  const code = generateCode();
+  state.role='host'; state.code=code; state.playerName=name;
+  state.questions=questions; state.qCount=questions.length;
+  state.qTime=qTime; state.report=[];
+
+  const safeQ=questions.map(q=>({text:q.q,a:q.a,b:q.b,c:q.c,d:q.d}));
+  const correctMap={};
+  questions.forEach((q,i)=>{ correctMap['q'+i]=q.correct; });
+
+  await ref(code).set({
+    host:name, status:'homework', qCount:questions.length, qTime,
+    questions:safeQ, correctAnswers:correctMap,
+    createdAt:firebase.database.ServerValue.TIMESTAMP, players:{}
+  });
+
+  document.getElementById('hw-code-disp').textContent=code;
+  showScreen('homework-host-screen');
+  listenHomeworkHost(code, questions);
+}
+
+function listenHomeworkHost(code, questions){
+  addListener(ref(code+'/players'),'value',snap=>{
+    const players=snap.val()||{};
+    const table=document.getElementById('hw-live-table');
+    const names=Object.keys(players);
+    if(!names.length){ table.innerHTML='<div style="color:#555;padding:20px;text-align:center">Waiting for students...</div>'; return; }
+    const rows=Object.entries(players).sort((a,b)=>(b[1].score||0)-(a[1].score||0)).map(([n,p],i)=>{
+      const done=p.hwDone;
+      const pct=p.qCount?Math.round((p.hwCorrect||0)/p.qCount*100):0;
+      return `<div class="hw-row">
+        <div class="hw-status">${done?'✅':'⏳'}</div>
+        <div class="hw-name">${escHtml(n)}</div>
+        <div style="font-size:12px;color:#666">${done?'Done · '+pct+'% correct':'Q'+(p.hwProgress||0)+'/'+(p.qCount||questions.length)}</div>
+        <div class="hw-score">${p.score||0} pts</div>
+      </div>`;
+    }).join('');
+    table.innerHTML=rows;
+    // Build report if anyone is done
+    const doneCount=names.filter(n=>players[n].hwDone).length;
+    if(doneCount>0) buildReportFromHomework(players, questions);
+    document.getElementById('hw-report-btn').style.display=doneCount>0?'':'none';
+  });
+}
+
+function buildReportFromHomework(players, questions){
+  state.report=questions.map((q,i)=>{
+    let correct=0, total=0;
+    Object.values(players).forEach(p=>{
+      if(!p.hwDone) return;
+      total++;
+      if(p.hwAnswers && p.hwAnswers['q'+i]===q.correct) correct++;
+    });
+    return {qi:i, text:q.q, correct, total, correctAnswer:q[q.correct]};
+  });
+}
+
+// Homework player flow
+let hwGame=null, hwQIndex=0, hwAnswers={}, hwCorrect=0;
+
+async function joinHomework(code, name){
+  const snap=await ref(code).once('value');
+  const game=snap.val();
+  if(!game||game.status!=='homework'){ toast('❌ No homework found with that code'); return; }
+  if(game.players&&game.players[name]){ toast('❌ Name taken'); return; }
+
+  hwGame=game; hwQIndex=0; hwAnswers={}; hwCorrect=0;
+  state.role='player'; state.code=code; state.playerName=name;
+  state.myColor=colorForName(name);
+
+  await ref(code+'/players/'+name).set({
+    score:0,hwProgress:0,hwCorrect:0,hwDone:false,
+    hwAnswers:{},qCount:game.qCount,color:state.myColor,isHost:false
+  });
+
+  document.getElementById('hw-play-title').textContent=game.host+"'s Homework";
+  document.getElementById('hw-play-sub').textContent=game.qCount+' questions · Take your time!';
+  showScreen('homework-play-screen');
+}
+
+function startHomeworkPlay(){ showHomeworkQuestion(0); }
+
+function showHomeworkQuestion(qi){
+  hwQIndex=qi;
+  const q=hwGame.questions[qi];
+  const total=hwGame.qCount;
+  const inner=document.getElementById('hw-play-inner');
+  inner.innerHTML=`
+    <div style="font-size:13px;color:#aaa;margin-bottom:8px">Question ${qi+1} of ${total}</div>
+    <div style="height:4px;background:#2a2a4a;border-radius:2px;margin-bottom:20px;overflow:hidden">
+      <div style="height:100%;width:${(qi/total)*100}%;background:var(--accent);border-radius:2px;transition:width .3s"></div>
+    </div>
+    <div style="font-size:20px;font-weight:800;margin-bottom:24px;line-height:1.4">${escHtml(q.text)}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      ${['a','b','c','d'].map((l,idx)=>`
+        <button onclick="submitHomeworkAnswer('${l}')" style="padding:14px;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;background:${ ['#c0392b','#2980b9','#d4ac0d','#27ae60'][idx] };color:${idx===2?'#1a1a2e':'#fff'};display:flex;align-items:center;gap:8px">
+          <span style="font-size:18px">${['▲','◆','●','■'][idx]}</span>${escHtml(q[l])}
+        </button>`).join('')}
+    </div>`;
+}
+
+async function submitHomeworkAnswer(letter){
+  const qi=hwQIndex;
+  const correct=hwGame.correctAnswers['q'+qi];
+  const isCorrect=letter===correct;
+  const q=hwGame.questions[qi];
+  if(isCorrect) hwCorrect++;
+  hwAnswers['q'+qi]=letter;
+  const gain=isCorrect?100:0;
+  state.score=(state.score||0)+gain;
+
+  // Show feedback briefly then advance
+  const inner=document.getElementById('hw-play-inner');
+  inner.innerHTML=`
+    <div style="font-size:72px;margin-bottom:12px">${isCorrect?'✅':'❌'}</div>
+    <div style="font-size:22px;font-weight:800;margin-bottom:8px">${isCorrect?'Correct! +100':'Wrong!'}</div>
+    ${!isCorrect?`<div style="font-size:14px;color:#aaa">Answer: <b style="color:#2ecc71">${escHtml(q[correct])}</b></div>`:''}`;
+
+  await ref(state.code+'/players/'+state.playerName).update({
+    hwProgress:qi+1, hwAnswers, score:state.score, hwCorrect
+  });
+
+  setTimeout(()=>{
+    if(qi+1>=hwGame.qCount){ finishHomework(); }
+    else { showHomeworkQuestion(qi+1); }
+  }, isCorrect?900:1600);
+}
+
+async function finishHomework(){
+  const pct=Math.round(hwCorrect/hwGame.qCount*100);
+  await ref(state.code+'/players/'+state.playerName).update({hwDone:true,hwAnswers,score:state.score,hwCorrect});
+  const inner=document.getElementById('hw-play-inner');
+  inner.innerHTML=`
+    <div style="font-size:72px;margin-bottom:12px">🎉</div>
+    <h2 style="margin-bottom:8px">All Done!</h2>
+    <div style="font-size:18px;color:var(--yellow);font-weight:900;margin-bottom:4px">${state.score} points</div>
+    <div style="font-size:14px;color:#aaa;margin-bottom:24px">${hwCorrect}/${hwGame.qCount} correct · ${pct}%</div>
+    <button class="btn btn-secondary" onclick="showScreen('home-screen')">🏠 Home</button>`;
+}
+
+// ============================
+// CUSTOM PACKS
+// ============================
+function loadCustomPacks(){ try{ return JSON.parse(localStorage.getItem('qb_packs')||'[]'); }catch(e){ return []; } }
+function saveCustomPacks(packs){ localStorage.setItem('qb_packs',JSON.stringify(packs)); }
+
+function renderPackManager(){
+  const packs=loadCustomPacks();
+  const list=document.getElementById('pm-list');
+  const empty=document.getElementById('pm-empty');
+  if(!packs.length){ list.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  list.innerHTML=packs.map((p,i)=>`
+    <div class="pm-card">
+      <div class="pm-info">
+        <div class="pm-name">📋 ${escHtml(p.name)}</div>
+        <div class="pm-meta">${p.questions.length} questions${p.shareCode?' · Code: <b>'+p.shareCode+'</b>':''}</div>
+      </div>
+      <div class="pm-actions">
+        <button class="btn btn-secondary btn-sm" onclick="openPackEditor(${i})">✏️</button>
+        <button class="btn btn-secondary btn-sm" onclick="sharePackOnline(${i})">🔗</button>
+        <button class="btn btn-red btn-sm" onclick="deletePack(${i})">🗑️</button>
+      </div>
+    </div>`).join('');
+  renderCustomPacksInSetup();
+}
+
+function renderCustomPacksInSetup(){
+  const packs=loadCustomPacks();
+  const container=document.getElementById('custom-pack-list');
+  if(!packs.length){ container.innerHTML=''; return; }
+  container.innerHTML='<div style="font-size:12px;color:#666;margin-bottom:6px">My custom packs</div>'+
+    packs.map((p,i)=>`
+      <div class="pack-card" onclick="selectCustomPack(${i},this)" style="border-color:#4a3a1a;margin-bottom:8px">
+        <div style="font-size:22px;margin-bottom:3px">📋</div>
+        <div>${escHtml(p.name)}</div>
+        <div style="font-size:11px;color:#888">${p.questions.length}q</div>
+      </div>`).join('');
+}
+
+function selectCustomPack(idx, el){
+  document.querySelectorAll('.pack-card').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedPack='__custom__'+idx;
+}
+
+let editingPackIdx = null;
+
+function openPackEditor(idx){
+  editingPackIdx = idx;
+  const packs=loadCustomPacks();
+  const pack = idx!==null ? packs[idx] : {name:'',questions:[]};
+  document.getElementById('pe-title').textContent = idx!==null ? 'Edit Pack' : 'Create Pack';
+  document.getElementById('pe-pack-name').value = pack.name;
+  const list=document.getElementById('pe-questions-list');
+  list.innerHTML='';
+  if(pack.questions.length){ pack.questions.forEach(q=>addQuestionRow(q)); }
+  else { addQuestionRow(); addQuestionRow(); addQuestionRow(); }
+  showScreen('pack-editor-screen');
+}
+
+function addQuestionRow(q=null){
+  const list=document.getElementById('pe-questions-list');
+  const idx=list.children.length;
+  const div=document.createElement('div');
+  div.className='pe-q-card';
+  div.dataset.qidx=idx;
+  div.innerHTML=`
+    <button class="pe-del-btn" onclick="this.closest('.pe-q-card').remove();renumberQCards()">✕</button>
+    <div class="pe-q-num">Question <span class="q-label">${idx+1}</span></div>
+    <textarea class="pe-q-input" rows="2" placeholder="Type your question here..." style="width:100%;background:#0f0f1a;border:1px solid #2a2a4a;border-radius:8px;color:#fff;padding:8px;font-size:14px;resize:vertical">${escHtml(q?q.q:'')}</textarea>
+    <div class="pe-opts">
+      ${['a','b','c','d'].map((l,i)=>`
+        <div class="pe-opt-row">
+          <label style="color:${ ['#e74c3c','#3498db','#d4ac0d','#27ae60'][i] }">${l.toUpperCase()}</label>
+          <input type="text" placeholder="Option ${l.toUpperCase()}" value="${escHtml(q?q[l]:'')}" data-opt="${l}"/>
+        </div>`).join('')}
+    </div>
+    <div class="pe-correct-row">
+      <span style="font-size:12px;color:#aaa;margin-right:4px">Correct:</span>
+      ${['a','b','c','d'].map(l=>`
+        <label><input type="radio" name="correct-${idx}" value="${l}" ${q&&q.correct===l?'checked':''}/> ${l.toUpperCase()}</label>`).join('')}
+    </div>`;
+  list.appendChild(div);
+}
+
+function renumberQCards(){
+  document.querySelectorAll('.pe-q-card').forEach((c,i)=>{ c.querySelector('.q-label').textContent=i+1; });
+}
+
+function savePack(){
+  const name=document.getElementById('pe-pack-name').value.trim();
+  if(!name){ toast('Give your pack a name first'); return; }
+  const cards=document.querySelectorAll('.pe-q-card');
+  const questions=[];
+  let valid=true;
+  cards.forEach((card,i)=>{
+    const q=card.querySelector('textarea').value.trim();
+    const a=card.querySelector('[data-opt=a]').value.trim();
+    const b=card.querySelector('[data-opt=b]').value.trim();
+    const c=card.querySelector('[data-opt=c]').value.trim();
+    const d=card.querySelector('[data-opt=d]').value.trim();
+    const correctEl=card.querySelector('input[type=radio]:checked');
+    if(!q||!a||!b||!c||!d||!correctEl){ toast('Q'+(i+1)+': fill all fields & pick correct answer'); valid=false; return; }
+    questions.push({q,a,b,c,d,correct:correctEl.value});
+  });
+  if(!valid) return;
+  if(questions.length<2){ toast('Add at least 2 questions'); return; }
+  const packs=loadCustomPacks();
+  if(editingPackIdx!==null){ packs[editingPackIdx]={name,questions,shareCode:packs[editingPackIdx]?.shareCode||null}; }
+  else { packs.push({name,questions,shareCode:null}); }
+  saveCustomPacks(packs);
+  toast('✅ Pack saved!');
+  renderPackManager();
+  showScreen('pack-manager-screen');
+}
+
+function deletePack(idx){
+  if(!confirm('Delete this pack?')) return;
+  const packs=loadCustomPacks();
+  packs.splice(idx,1);
+  saveCustomPacks(packs);
+  renderPackManager();
+}
+
+async function sharePackOnline(idx){
+  const packs=loadCustomPacks();
+  const pack=packs[idx];
+  if(pack.shareCode){ toast('Share code: '+pack.shareCode); return; }
+  const code='P'+Math.random().toString(36).slice(2,7).toUpperCase();
+  try{
+    await db.ref('qb_shared/'+code).set({name:pack.name,questions:pack.questions,createdAt:firebase.database.ServerValue.TIMESTAMP});
+    packs[idx].shareCode=code;
+    saveCustomPacks(packs);
+    renderPackManager();
+    toast('📋 Share code: '+code+' (copied!)');
+    navigator.clipboard?.writeText(code).catch(()=>{});
+  }catch(e){ toast('❌ Could not share — check internet'); }
+}
+
+async function importPackByCode(){
+  const code=document.getElementById('import-code-inp').value.trim().toUpperCase();
+  if(!code){ toast('Enter a share code'); return; }
+  try{
+    const snap=await db.ref('qb_shared/'+code).once('value');
+    const data=snap.val();
+    if(!data){ toast('❌ Pack not found'); return; }
+    const packs=loadCustomPacks();
+    packs.push({name:data.name+' (imported)',questions:data.questions,shareCode:code});
+    saveCustomPacks(packs);
+    renderPackManager();
+    toast('✅ Pack imported: '+data.name);
+    document.getElementById('import-code-inp').value='';
+  }catch(e){ toast('❌ Could not import'); }
+}
+
+// ============================
+// REPORT SCREEN
+// ============================
+function showReportScreen(){
+  const report=state.report||[];
+  if(!report.length){ toast('No report data yet'); return; }
+  const total=report[0]?.total||1;
+  const avgPct=Math.round(report.reduce((s,r)=>s+(r.correct/r.total),0)/report.length*100);
+  document.getElementById('report-summary').innerHTML=
+    `<b>${report.length} questions</b> · Average score: <b style="color:${avgPct>70?'#2ecc71':avgPct>50?'#f1c40f':'#e74c3c'}">${avgPct}%</b> ·
+    Questions to reteach: <b style="color:#e74c3c">${report.filter(r=>r.correct/r.total<0.5).length}</b>`;
+  const sorted=[...report].sort((a,b)=>(a.correct/a.total)-(b.correct/b.total));
+  document.getElementById('report-list').innerHTML=sorted.map((r,i)=>{
+    const pct=Math.round(r.correct/r.total*100);
+    const col=pct>80?'#2ecc71':pct>50?'#f1c40f':'#e74c3c';
+    return `<div class="report-row">
+      <div class="rq-num">Q${r.qi+1}</div>
+      <div class="rq-text">${escHtml(r.text)}<div style="font-size:11px;color:#2ecc71;margin-top:2px">✓ ${escHtml(r.correctAnswer||'')}</div></div>
+      <div class="rq-bar-wrap"><div class="rq-bar-fill" style="width:${pct}%;background:${col}"></div></div>
+      <div class="rq-pct" style="color:${col}">${pct}%</div>
+    </div>`;
+  }).join('');
+  showScreen('report-screen');
+}
+
+function copyReportCSV(){
+  const report=state.report||[];
+  const rows=['Q#,Question,Correct,Total,%'].concat(report.map(r=>`${r.qi+1},"${r.text}",${r.correct},${r.total},${Math.round(r.correct/r.total*100)}`));
+  navigator.clipboard?.writeText(rows.join('\n')).then(()=>toast('📋 Copied to clipboard!')).catch(()=>toast('Select the text manually'));
+}
+
+// ============================
 // INIT
 // ============================
 initPackGrid();
+renderCustomPacksInSetup();
 </script>
 </body>
 </html>
