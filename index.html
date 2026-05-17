@@ -324,7 +324,7 @@ input::placeholder{color:#555}
   <div style="text-align:center;margin-bottom:8px">
     <div style="font-size:14px;color:#aaa;margin-bottom:4px">Share this code with players:</div>
     <div class="code-display" id="lobby-code-display">------</div>
-    <div style="font-size:13px;color:#666;margin-bottom:16px">quizblitz.eppeok.github.io or any device</div>
+    <div style="font-size:13px;color:#666;margin-bottom:16px">eppeok.github.io/quizblitz/</div>
   </div>
   <div id="lobby-mode-info" style="font-size:14px;color:var(--yellow);margin-bottom:12px;font-weight:700"></div>
   <div class="player-grid" id="lobby-player-grid">
@@ -549,7 +549,7 @@ input::placeholder{color:#555}
 // ============================
 // FIREBASE INIT
 // ============================
-firebase.initializeApp({
+if(!firebase.apps.length) firebase.initializeApp({
   apiKey:"AIzaSyAfflbNLrrn95tPvLW0bzR8Q4iAqOKUOrM",
   authDomain:"sdvb-d16b2.firebaseapp.com",
   databaseURL:"https://sdvb-d16b2-default-rtdb.firebaseio.com",
